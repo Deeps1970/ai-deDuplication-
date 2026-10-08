@@ -1,0 +1,67 @@
+import type { AnalysisPreset, DemoFile, DuplicateGroup } from "@/types/dedupai";
+
+export const MOCK_STORAGE = {
+  totalFiles: 1248,
+  originalGb: 12.8,
+  optimizedGb: 8.4,
+  savedGb: 4.4,
+  deduplicationRate: 34.4,
+};
+
+export const MOCK_FILES: DemoFile[] = [
+  { id: "f-001", name: "Project_Report.pdf", type: "PDF", sizeMb: 4.2, status: "Unique", similarity: null, location: "Reports / 2025", uploaded: "Oct 08, 2026", potentialSavingMb: 0 },
+  { id: "f-002", name: "Project_Report_Copy.pdf", type: "PDF", sizeMb: 4.1, status: "Duplicate", similarity: 100, location: "Reports / Copies", uploaded: "Oct 08, 2026", potentialSavingMb: 4.1 },
+  { id: "f-003", name: "Project_Report_Final.pdf", type: "PDF", sizeMb: 4, status: "Similar", similarity: 93, location: "Reports / 2025", uploaded: "Oct 07, 2026", potentialSavingMb: 3.7 },
+  { id: "f-004", name: "Network_Security.pdf", type: "PDF", sizeMb: 7.8, status: "Unique", similarity: null, location: "Coursework / Security", uploaded: "Oct 07, 2026", potentialSavingMb: 0 },
+  { id: "f-005", name: "Lecture_Notes_Week_4.docx", type: "DOCX", sizeMb: 2.6, status: "Unique", similarity: null, location: "Coursework / Notes", uploaded: "Oct 06, 2026", potentialSavingMb: 0 },
+  { id: "f-006", name: "Campus_Map.png", type: "PNG", sizeMb: 1.8, status: "Duplicate", similarity: 100, location: "Shared / Images", uploaded: "Oct 06, 2026", potentialSavingMb: 1.8 },
+  { id: "f-007", name: "Research_Abstract.txt", type: "TXT", sizeMb: 0.4, status: "Unique", similarity: null, location: "Research / Drafts", uploaded: "Oct 05, 2026", potentialSavingMb: 0 },
+  { id: "f-008", name: "Dataset_Visualisation.jpg", type: "JPG", sizeMb: 3.3, status: "Similar", similarity: 89, location: "Research / Media", uploaded: "Oct 04, 2026", potentialSavingMb: 2.4 },
+  { id: "f-009", name: "Semester_Archive.zip", type: "ZIP", sizeMb: 18.6, status: "Unique", similarity: null, location: "Archives / 2026", uploaded: "Oct 03, 2026", potentialSavingMb: 0 },
+  { id: "f-010", name: "Project_Report_v2.pdf", type: "PDF", sizeMb: 4.1, status: "Duplicate", similarity: 100, location: "Reports / Copies", uploaded: "Oct 02, 2026", potentialSavingMb: 4.1 },
+  { id: "f-011", name: "Presentation_Final.pptx", type: "PPTX", sizeMb: 6.4, status: "Unique", similarity: null, location: "Presentations", uploaded: "Oct 01, 2026", potentialSavingMb: 0 },
+  { id: "f-012", name: "Lab_Results.docx", type: "DOCX", sizeMb: 2.1, status: "Similar", similarity: 92, location: "Labs / Results", uploaded: "Sep 29, 2026", potentialSavingMb: 1.5 },
+  { id: "f-013", name: "Team_Photo.jpg", type: "JPG", sizeMb: 5.6, status: "Unique", similarity: null, location: "Shared / Images", uploaded: "Sep 28, 2026", potentialSavingMb: 0 },
+  { id: "f-014", name: "Database_Notes.pdf", type: "PDF", sizeMb: 3.7, status: "Duplicate", similarity: 100, location: "Coursework / Notes", uploaded: "Sep 27, 2026", potentialSavingMb: 3.7 },
+];
+
+export const MOCK_GROUPS: DuplicateGroup[] = [
+  { id: "001", primaryFile: "Project_Report.pdf", relatedFiles: [{ name: "Project_Report_Copy.pdf", similarity: 100 }, { name: "Project_Report_Final.pdf", similarity: 93 }, { name: "Project_Report_v2.pdf", similarity: 89 }], totalSizeMb: 12.4, potentialSavingMb: 9.2 },
+  { id: "002", primaryFile: "Campus_Map.png", relatedFiles: [{ name: "Campus_Map_backup.png", similarity: 100 }, { name: "Campus_Map_annotated.png", similarity: 91 }], totalSizeMb: 5.2, potentialSavingMb: 3.1 },
+  { id: "003", primaryFile: "Database_Notes.pdf", relatedFiles: [{ name: "Database_Notes_copy.pdf", similarity: 100 }], totalSizeMb: 7.4, potentialSavingMb: 3.7 },
+];
+
+export const MOCK_ACTIVITY = [
+  { day: "Mon", analyzed: 142, duplicates: 38, saved: 410 },
+  { day: "Tue", analyzed: 186, duplicates: 51, saved: 560 },
+  { day: "Wed", analyzed: 164, duplicates: 42, saved: 470 },
+  { day: "Thu", analyzed: 211, duplicates: 69, saved: 720 },
+  { day: "Fri", analyzed: 176, duplicates: 54, saved: 610 },
+  { day: "Sat", analyzed: 118, duplicates: 31, saved: 340 },
+  { day: "Sun", analyzed: 153, duplicates: 47, saved: 520 },
+];
+
+export const MOCK_SAVINGS_TREND = [
+  { month: "May", saved: 2.1 },
+  { month: "Jun", saved: 2.6 },
+  { month: "Jul", saved: 2.9 },
+  { month: "Aug", saved: 3.4 },
+  { month: "Sep", saved: 3.8 },
+  { month: "Oct", saved: 4.4 },
+];
+
+export const MOCK_ANALYSIS_PRESETS: AnalysisPreset[] = [
+  { status: "Unique", similarity: null, matchedFile: null, recommendation: "This file appears unique in the demo dataset.", potentialSavingMb: 0 },
+  { status: "Duplicate", similarity: 100, matchedFile: "Project_Report.pdf", recommendation: "An existing file reference would be used in a connected version.", potentialSavingMb: 4.1 },
+  { status: "Similar", similarity: 93.4, matchedFile: "Project_Report.pdf", recommendation: "Review the matched file before deciding what to store.", potentialSavingMb: 3.7 },
+];
+
+export const DEMO_INSIGHTS = [
+  { value: "34.4%", label: "of uploaded storage is marked redundant in this sample" },
+  { value: "128", label: "sample files are classified as exact duplicates" },
+  { value: "76", label: "sample files are flagged for similarity review" },
+  { value: "4.4 GB", label: "estimated storage savings in the sample data" },
+];
+
+export const ACCEPTED_FILE_TYPES = ["pdf", "docx", "txt", "jpg", "jpeg", "png", "zip"];
+export const MAX_DEMO_FILE_SIZE_BYTES = 100 * 1024 * 1024;
