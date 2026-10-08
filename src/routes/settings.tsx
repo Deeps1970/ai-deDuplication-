@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Check, Cloud, HardDrive, Monitor, Save, ScanSearch, Settings2, ShieldCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { PageHeading, DemoNotice } from "@/components/dedupai/shared";
 
@@ -27,7 +26,7 @@ function SettingsPage() {
     <DemoNotice compact />
     <section className="mt-5 rounded-lg border border-border bg-card"><SettingsSectionHeader icon={ScanSearch} title="Deduplication preferences" description="Illustrative options only; they do not change analysis behavior." />
       <div className="space-y-6 p-5 sm:p-6">
-        <div><div className="mb-3 flex flex-wrap items-center justify-between gap-2"><Label htmlFor="similarity-threshold" className="text-xs font-medium">Similarity threshold</Label><span className="rounded-sm border border-border bg-secondary px-2 py-1 text-xs font-semibold tabular-nums">{threshold[0]}%</span></div><Slider id="similarity-threshold" min={50} max={100} step={1} value={threshold} onValueChange={setThreshold} aria-label="Similarity threshold" /><div className="mt-2 flex justify-between text-[10px] text-muted-foreground"><span>50%</span><span>100%</span></div></div>
+        <div><div className="mb-3 flex flex-wrap items-center justify-between gap-2"><Label htmlFor="similarity-threshold" className="text-xs font-medium">Similarity threshold</Label><span className="rounded-sm border border-border bg-secondary px-2 py-1 text-xs font-semibold tabular-nums">{threshold[0]}%</span></div><input id="similarity-threshold" type="range" min={50} max={100} step={1} value={threshold[0]} onChange={(event) => setThreshold([Number(event.currentTarget.value)])} aria-label="Similarity threshold" className="h-2 w-full cursor-pointer accent-primary" /><div className="mt-2 flex justify-between text-[10px] text-muted-foreground"><span>50%</span><span>100%</span></div></div>
         <SettingToggle id="automatic-reference" icon={Cloud} title="Allow automatic duplicate reference" description="Show the suggested reference action in sample results." checked={automaticReference} onChange={setAutomaticReference} />
         <SettingToggle id="analyze-similar" icon={Sparkles} title="Analyze similar files" description="Include similarity examples in the demo interface." checked={analyzeSimilar} onChange={setAnalyzeSimilar} />
       </div>
