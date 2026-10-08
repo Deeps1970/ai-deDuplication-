@@ -9,4 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep mock datasets and demo file state in shared modules/providers, with file-based pages behind the shared shell, so presentation and future API data sources can evolve independently.
+- Keep mock datasets and demo file state in shared modules/providers, with file-based pages behind the shared shell and a typed `src/services/api.ts` contract boundary, so future API integrations replace data access without coupling the presentation to request details.
