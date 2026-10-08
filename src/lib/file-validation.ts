@@ -6,7 +6,7 @@ export function validateDemoFile(file: Pick<File, "name" | "size">): string | nu
     return "Choose a PDF, DOCX, TXT, JPG, PNG, or ZIP file.";
   }
   if (file.size > MAX_DEMO_FILE_SIZE_BYTES) {
-    return "Files must be 100 MB or smaller for this demo.";
+    return "Files must be 50 MiB or smaller.";
   }
   return null;
 }

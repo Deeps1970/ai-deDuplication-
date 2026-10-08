@@ -7,11 +7,15 @@ describe("demo file validation", () => {
     expect(validateDemoFile({ name: "project.pdf", size: MAX_DEMO_FILE_SIZE_BYTES })).toBeNull();
   });
 
-  it("rejects a supported file over the 100 MB limit", () => {
-    expect(validateDemoFile({ name: "project.pdf", size: MAX_DEMO_FILE_SIZE_BYTES + 1 })).toBe("Files must be 100 MB or smaller for this demo.");
+  it("rejects a supported file over the 50 MiB backend limit", () => {
+    expect(validateDemoFile({ name: "project.pdf", size: MAX_DEMO_FILE_SIZE_BYTES + 1 })).toBe(
+      "Files must be 50 MiB or smaller.",
+    );
   });
 
   it("rejects file types outside the supported formats", () => {
-    expect(validateDemoFile({ name: "project.exe", size: 1024 })).toBe("Choose a PDF, DOCX, TXT, JPG, PNG, or ZIP file.");
+    expect(validateDemoFile({ name: "project.exe", size: 1024 })).toBe(
+      "Choose a PDF, DOCX, TXT, JPG, PNG, or ZIP file.",
+    );
   });
 });

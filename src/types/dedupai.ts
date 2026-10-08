@@ -1,4 +1,4 @@
-export type FileStatus = "Unique" | "Duplicate" | "Similar";
+export type FileStatus = "Unique" | "Duplicate" | "Similar" | "Pending";
 
 export interface DemoFile {
   id: string;
@@ -9,13 +9,17 @@ export interface DemoFile {
   similarity: number | null;
   location: string;
   uploaded: string;
+  createdAt?: string;
   potentialSavingMb: number;
+  analysisStatus?: "pending" | "completed" | "unsupported" | "failed" | null;
+  duplicateOf?: string | null;
 }
 
 export interface DuplicateGroup {
   id: string;
+  primaryFileId?: string;
   primaryFile: string;
-  relatedFiles: { name: string; similarity: number }[];
+  relatedFiles: { id?: string; name: string; similarity: number | null; sizeMb?: number }[];
   totalSizeMb: number;
   potentialSavingMb: number;
 }
@@ -26,4 +30,5 @@ export interface AnalysisPreset {
   matchedFile: string | null;
   recommendation: string;
   potentialSavingMb: number;
+  storageSaved?: boolean;
 }
