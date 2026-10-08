@@ -31,7 +31,7 @@ function UploadPage() {
     const additions: UploadItem[] = Array.from(selected).map((file, index) => {
       const error = validateDemoFile(file);
       const sizeMb = file.size / (1024 * 1024);
-      return { id: `${Date.now()}-${index}-${file.name}`, name: file.name, type: file.name.split(".").pop()?.toUpperCase() ?? "FILE", sizeMb, progress: 0, state: error ? "error" : "queued", error: error ?? undefined, file };
+      return { id: `${Date.now()}-${index}-${file.name}`, name: file.name, type: file.name.split(".").pop()?.toUpperCase() ?? "FILE", sizeMb, progress: 0, state: error ? "error" as const : "queued" as const, ...(error ? { error } : {}), file };
     });
     setItems((current) => [...current, ...additions]);
     setResults([]);
@@ -68,7 +68,11 @@ function UploadPage() {
         }).filter((item): item is DemoFile & { result: AnalysisPreset } => item !== null);
         completed.forEach((item) => addUploadedFile(item));
         setResults(completed);
-        setItems((current) => current.map((item) => item.state === "uploading" ? { ...item, state: "complete", progress: 100, file: undefined } : item));
+        setItems((current) => current.map((item) => {
+          if (item.state !== "uploading") return item;
+          const { file: _file, ...completedItem } = item;
+          return { ...completedItem, state: "complete", progress: 100 };
+        }));
         setBusy(false);
       }
     }, 180);
@@ -97,10 +101,14 @@ function UploadPage() {
 
 function getPreset(name: string, index: number): AnalysisPreset {
   const normalized = name.toLowerCase();
-  if (normalized.includes("copy") || normalized.includes("duplicate") || normalized.includes("backup")) return MOCK_ANALYSIS_PRESETS[1];
-  if (normalized.includes("final") || normalized.includes("similar") || normalized.includes("version")) return MOCK_ANALYSIS_PRESETS[2];
-  if (normalized.includes("unique")) return MOCK_ANALYSIS_PRESETS[0];
-  return MOCK_ANALYSIS_PRESETS[index % MOCK_ANALYSIS_PRESETS.length];
+  const preset = normalized.includes("copy") || normalized.includes("duplicate") || normalized.includes("backup")
+    ? MOCK_ANALYSIS_PRESETS.find((item) => item.status === "Duplicate")
+    : normalized.includes("final") || normalized.includes("similar") || normalized.includes("version")
+      ? MOCK_ANALYSIS_PRESETS.find((item) => item.status === "Similar")
+      : normalized.includes("unique")
+        ? MOCK_ANALYSIS_PRESETS.find((item) => item.status === "Unique")
+        : MOCK_ANALYSIS_PRESETS[index % MOCK_ANALYSIS_PRESETS.length];
+  return preset ?? { status: "Unique", similarity: null, matchedFile: null, recommendation: "This file appears unique in the demo dataset.", potentialSavingMb: 0 };
 }
 
 function QueueStatus({ item }: { item: UploadItem }) {

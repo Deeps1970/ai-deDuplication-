@@ -21,9 +21,9 @@ const distribution = [
 
 function AnalyticsPage() {
   const { uploadedFiles } = useDedupAI();
-  const unique = distribution[0].value + uploadedFiles.filter((file) => file.status === "Unique").length;
-  const duplicates = distribution[1].value + uploadedFiles.filter((file) => file.status === "Duplicate").length;
-  const similar = distribution[2].value + uploadedFiles.filter((file) => file.status === "Similar").length;
+  const unique = (distribution.find((item) => item.name === "Unique")?.value ?? 0) + uploadedFiles.filter((file) => file.status === "Unique").length;
+  const duplicates = (distribution.find((item) => item.name === "Duplicate")?.value ?? 0) + uploadedFiles.filter((file) => file.status === "Duplicate").length;
+  const similar = (distribution.find((item) => item.name === "Similar")?.value ?? 0) + uploadedFiles.filter((file) => file.status === "Similar").length;
   return <div className="animate-enter-soft">
     <PageHeading eyebrow="Workspace / Analytics" title="Analytics" description="A closer look at storage efficiency and file classifications in the sample workspace." />
     <DemoNotice compact />
