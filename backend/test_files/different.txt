@@ -1,0 +1,3 @@
+Machine learning is used in healthcare to assist doctors with medical image analysis.
+Weather forecasting uses atmospheric measurements and numerical prediction models.
+These applications are unrelated to cloud storage and file deduplication.

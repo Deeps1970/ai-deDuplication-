@@ -1,0 +1,3 @@
+This is a similar document for the AI Data Deduplication project.
+The system identifies duplicate and similar files to reduce unnecessary cloud storage.
+It uses hashing and similarity analysis to detect redundant data.
