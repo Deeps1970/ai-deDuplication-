@@ -1,4 +1,4 @@
-# ☁️ AI-Based Intelligent Data Deduplication for Cloud Storage
+# ☁️DeDup-AI | AI-Based Intelligent Data Deduplication for Cloud Storage
 
 > **An intelligent cloud file management system that detects exact and near-duplicate files using SHA-256 hashing and TF-IDF cosine similarity, helping reduce redundant storage and improve cloud storage efficiency.**
 
