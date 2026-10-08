@@ -1,3 +1,3 @@
 - [x] Build the DedupAI shared shell, dashboard, and requested pages using centralized demo data.
 - [x] Implement local-only search, file filters, settings controls, and the simulated upload-to-result flow.
-- [ ] Test upload limits, run the app checks, and verify the main demo flow and responsive layout.
+- [x] Test upload limits, run the app checks, and verify the main demo flow and responsive layout.
