@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep mock datasets and demo file state in shared modules/providers, with file-based pages behind the shared shell, so presentation and future API data sources can evolve independently.
